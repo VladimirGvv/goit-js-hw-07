@@ -2,3 +2,32 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
 console.log(galleryItems);
+
+const gallery = document.querySelector(".gallery");
+const galaryMarkup = createMarckup(galleryItems);
+// console.log(galaryMarkup);
+
+
+gallery.insertAdjacentHTML("beforeend", galaryMarkup);
+
+gallery.addEventListener("click", onGalleryContainerClick);
+
+
+function createMarckup(galleryItems) {
+  return galleryItems
+    .map(({ preview, original, description }) => {
+      return `
+   <a class="gallery__item" href="${preview}">
+        <img class="gallery__image" 
+        src="${original}" 
+        alt="${description}" />
+    </a>
+    `;
+    })
+    .join("");
+}
+
+function onGalleryContainerClick(evt) {
+    evt.preventDefault();
+}
+const lightbox = new SimpleLightbox('.gallery__item')
